@@ -1,0 +1,93 @@
+#include<iostream>
+using namespace std;
+class feet_inches;
+
+class meter_centimeter
+
+{
+    int mt,cm,n1,n2,sum,n3;
+    public:
+    void getdata();
+    void display();
+    void add();
+    friend meter_centimeter add(meter_centimeter,feet_inches);
+};
+
+void meter_centimeter::getdata()
+
+{
+    cout<<"Enter the value in meter: ";
+    cin>>mt;
+    cout<<"Enter the value in centimeter: ";
+    cin>>cm;
+   
+}
+
+void meter_centimeter::add()
+{
+    n1=mt*100;
+    sum = n1 + cm;
+    n2=sum/100;
+    n3=sum%100;
+   
+}
+
+void meter_centimeter::display()
+
+
+{
+     cout<<n2<<"mt"<<"\t"<<n3<<"cm";
+}
+
+class feet_inches
+
+{
+    int ft,in,n1,n2,n3,sum;
+    public:
+    void accept();
+    void output();
+    friend meter_centimeter add(meter_centimeter,feet_inches);
+   
+};
+
+void feet_inches::accept()
+{
+    cout<<"\n"<<"Enter the value in feet: ";
+    cin>>ft;
+    cout<<"Enter the value in inches: ";
+    cin>>in;
+}
+
+
+
+void feet_inches::output()
+
+{
+    cout<<ft<<"feet"<<"\t"<<in<<"inches"<<"\n";
+}
+
+meter_centimeter add(meter_centimeter m1,feet_inches f1)
+
+{
+    float cal;
+    meter_centimeter temp;
+    cal= (m1.mt*100) + (m1.cm) + (f1.ft*30.2) + (f1.in*2.54);
+    int result=cal;
+    temp.mt = result/100;
+    temp.cm= result%100;
+   
+    return temp;
+    }
+
+int main()
+{
+    meter_centimeter m1,m2;
+    feet_inches f1;
+    m1.getdata();
+    m1.add();
+    m1.display();
+    f1.accept();
+    f1.output();
+    m2 = add(m1,f1);
+    m2.display();
+}
